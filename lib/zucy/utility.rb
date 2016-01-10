@@ -28,4 +28,8 @@ class String
     gsub!(/([^sae])$/i, '\1s')
     self
   end
+
+  def constantize
+    Object.const_get(self)
+  end
 end
