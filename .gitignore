@@ -7,4 +7,5 @@
 /pkg/
 /spec/reports/
 /tmp/
+/coverage
 zucy-0.1.0.gem
