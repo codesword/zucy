@@ -1,5 +1,4 @@
 class TodolistController
-
   def get
     "['Write a book', 'Build a house', 'Get married', 'Buy a car']"
   end
