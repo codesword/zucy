@@ -1,21 +1,26 @@
 class TodolistController
-  def get
+
+  def initialize(request)
+    @request = request
+  end
+
+  def index
     "['Write a book', 'Build a house', 'Get married', 'Buy a car']"
   end
 
-  def get_first
+  def show
     "Write a book"
   end
 
-  def post
+  def create
     "Post go swimming"
   end
 
-  def put
+  def update
     "Put Write a book"
   end
 
-  def delete
+  def destroy
     "Delete Write a book"
   end
 end
