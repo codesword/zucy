@@ -1,58 +1,21 @@
 module Zucy
   module Routing
     class Router
+
+      [:get, :post, :put, :patch, :delete].each do |method_name|
+        define_method(method_name) do |path, to:|
+          path = "/#{path}" unless path[0] = "/"
+          klass_and_method = controller_and_action_for(to)
+          @route_data = { path: path,
+                          pattern: pattern_for(path),
+                          klass_and_method: klass_and_method
+                       }
+          endpoints[method_name] << @route_data
+        end
+      end
+
       def draw(&block)
         instance_eval(&block)
-      end
-
-      def get(path, to:)
-        path = "/#{path}" unless path[0] = "/"
-        klass_and_method = controller_and_action_for(to)
-        @route_data = { path: path,
-                        pattern: pattern_for(path),
-                        klass_and_method: klass_and_method
-                     }
-        endpoints[:get] << @route_data
-      end
-
-      def post(path, to:)
-        path = "/#{path}" unless path[0] = "/"
-        klass_and_method = controller_and_action_for(to)
-        @route_data = { path: path,
-                        pattern: pattern_for(path),
-                        klass_and_method: klass_and_method
-                     }
-        endpoints[:post] << @route_data
-      end
-
-      def put(path, to:)
-        path = "/#{path}" unless path[0] = "/"
-        klass_and_method = controller_and_action_for(to)
-        @route_data = { path: path,
-                        pattern: pattern_for(path),
-                        klass_and_method: klass_and_method
-                     }
-        endpoints[:put] << @route_data
-      end
-
-      def patch(path, to:)
-        path = "/#{path}" unless path[0] = "/"
-        klass_and_method = controller_and_action_for(to)
-        @route_data = { path: path,
-                        pattern: pattern_for(path),
-                        klass_and_method: klass_and_method
-                     }
-        endpoints[:patch] << @route_data
-      end
-
-      def delete(path, to:)
-        path = "/#{path}" unless path[0] = "/"
-        klass_and_method = controller_and_action_for(to)
-        @route_data = { path: path,
-                        pattern: pattern_for(path),
-                        klass_and_method: klass_and_method
-                     }
-        endpoints[:delete] << @route_data
       end
 
       def root(to)
