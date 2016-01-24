@@ -18,8 +18,9 @@ module Zucy
       def match_path_with_pattern(path, endpoint)
         regexp, placeholders = endpoint[:pattern]
         if path =~ regexp
+          match_data = Regexp.last_match
           placeholders.each do |placeholder|
-            @request.update_param(placeholder, eval(placeholder))
+            @request.update_param(placeholder, match_data[placeholder])
           end
           true
         end
