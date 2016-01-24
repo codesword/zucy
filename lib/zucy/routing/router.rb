@@ -9,7 +9,7 @@ module Zucy
           @route_data = { path: path,
                           pattern: pattern_for(path),
                           klass_and_method: klass_and_method
-                       }
+                        }
           endpoints[method_name] << @route_data
         end
       end
@@ -31,7 +31,7 @@ module Zucy
       def pattern_for(path)
         placeholders = []
         regexp_part = path.gsub(/(:\w+)/) do |match|
-          placeholders << match[1..-1].to_sym
+          placeholders << match[1..-1].freeze
           "(?<#{placeholders.last}>[^/?#]+)"
         end
         [/^#{regexp_part}$/, placeholders]

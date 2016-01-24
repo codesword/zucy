@@ -15,11 +15,6 @@ describe Zucy::Routing::Router do
     router.draw(&block).route_data
   end
 
-  def route(regexp, placeholders, controller, action, path)
-    pattern = [regexp, placeholders]
-    { path: path, pattern: pattern, klass_and_method: [controller, action] }
-  end
-
   context "endpoints" do
     context "get '/photos', to: 'photos#index'" do
       subject do
@@ -40,7 +35,7 @@ describe Zucy::Routing::Router do
       end
 
       route_data = { path: "/photos/:id",
-                     pattern: [%r{^/photos/(?<id>[^/?#]+)$}, [:id]],
+                     pattern: [%r{^/photos/(?<id>[^/?#]+)$}, ["id"]],
                      klass_and_method: ["PhotosController", :show]
                    }
 
@@ -54,7 +49,7 @@ describe Zucy::Routing::Router do
 
       regexp = %r{^/photos/(?<id>[^/?#]+)/edit$}
       route_data = { path: "/photos/:id/edit",
-                     pattern: [regexp, [:id]],
+                     pattern: [regexp, ["id"]],
                      klass_and_method: ["PhotosController", :edit]
                    }
 
@@ -68,7 +63,7 @@ describe Zucy::Routing::Router do
 
       regexp = %r{^/album/(?<album_id>[^/?#]+)/photos/(?<photo_id>[^/?#]+)$}
       route_data = { path: "/album/:album_id/photos/:photo_id",
-                     pattern: [regexp, [:album_id, :photo_id]],
+                     pattern: [regexp, ["album_id", "photo_id"]],
                      klass_and_method: ["PhotosController", :album_photo]
                    }
 
