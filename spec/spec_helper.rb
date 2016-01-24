@@ -10,4 +10,3 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "todolist/config/application.rb"
 
 ENV["RACK_ENV"] = "test"
-
